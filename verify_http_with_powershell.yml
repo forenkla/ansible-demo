@@ -1,0 +1,17 @@
+---
+- name: Use PowerShell to verify HTTP listener
+  hosts: windows
+  
+  tasks:
+    - name: Verify the WSMan HTTP listener is active and configured correctly
+      ansible.windows.win_shell: |
+        $port = (Get-Item -LiteralPath WSMan:\localhost\Client\DefaultPorts\HTTP).Value
+        $onlinePorts = @(Get-ChildItem -LiteralPath WSMan:\localhost\Listener |
+            Where-Object { 'Transport=HTTP' -in $_.Keys } |
+            Get-ChildItem |
+            Where-Object Name -eq Port |
+            Select-Object -ExpandProperty Value)
+
+      if ($port -notin $onlinePorts) {
+        "The default client port $port is not set up as a WSMan HTTP listener, win_dsc will not work."
+      }
