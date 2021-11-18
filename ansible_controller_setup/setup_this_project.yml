@@ -1,0 +1,22 @@
+---
+- name: Setup ansible-demo project to controller
+  hosts: localhost
+  become: false
+  gather_facts: false
+  tasks:
+  - name: Add EE to controller
+    execution_environment:
+      name: "Win EE"
+      image: quay.io/jboivie/win_ee:latest
+      
+  - name: AWX Project
+    awx.awx.project:
+      name: ansible-demo
+      organization: Default
+      default_environment: "Win EE"
+      state: present
+      scm_update_on_launch: True
+      scm_delete_on_update: True
+      scm_type: git
+      scm_url: https://github.com/forenkla/ansible-demo.git
+      
