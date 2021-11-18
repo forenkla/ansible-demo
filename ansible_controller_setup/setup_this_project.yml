@@ -3,7 +3,23 @@
   hosts: localhost
   become: false
   gather_facts: false
+  
+  vars_prompt:
+    - name: win_username
+      prompt: Enter username for Windows host
+    - name: win_password
+      prompt: Enter password for Windows host
+      
   tasks:
+  - name: Add Windows credentials
+    awx.awx.credential:
+      name: Windows credentials
+      credential_type: Machine
+      organization: Default
+      inputs:
+        username: {{ win_username }}
+        password: {{ win_password }}
+      
   - name: Add EE to controller
     awx.awx.execution_environment:
       name: "Win EE"
