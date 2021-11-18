@@ -5,7 +5,7 @@
   gather_facts: false
   tasks:
   - name: Add EE to controller
-    execution_environment:
+    awx.awx.execution_environment:
       name: "Win EE"
       image: quay.io/jboivie/win_ee:latest
       
