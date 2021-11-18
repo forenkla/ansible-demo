@@ -43,7 +43,7 @@
       scm_type: git
       scm_url: https://github.com/forenkla/ansible-demo.git
       
-  - name: AWX Job Template
+  - name: Add Job Template for install_iis.yml
     awx.awx.job_template:
       name: Install IIS
       organization: Default
@@ -53,7 +53,7 @@
       project: ansible-demo
       credential: Windows credentials
 
-  - name: AWX Job Template
+  - name: Add Job Template for multiple_iis_sites.yml
     awx.awx.job_template:
       name: Setup multiple IIS sites
       organization: Default
@@ -63,7 +63,7 @@
       project: ansible-demo
       credential: Windows credentials
       
-  - name: AWX Job Template
+  - name: Add Job Template for install_chocolatey.yml
     awx.awx.job_template:
       name: Install Git with Chocolatey
       organization: Default
@@ -73,7 +73,7 @@
       project: ansible-demo
       credential: Windows credentials
       
-  - name: AWX Job Template
+  - name: Add Job Template for verify_http_with_powershell.yml
     awx.awx.job_template:
       name: Verify the WSMan HTTP listener
       organization: Default
@@ -83,7 +83,7 @@
       project: ansible-demo
       credential: Windows credentials
       
-  - name: AWX Job Template
+  - name: Add Job Template for legal_message_regedit.yml
     awx.awx.job_template:
       name: Change legal message with Regedit
       organization: Default
