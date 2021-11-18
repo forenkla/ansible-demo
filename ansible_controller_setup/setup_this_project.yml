@@ -3,13 +3,16 @@
   hosts: localhost
   become: false
   gather_facts: false
-  
+
   vars_prompt:
     - name: win_username
       prompt: Enter username for Windows host
+      private: no
+
     - name: win_password
       prompt: Enter password for Windows host
-      
+      private: no
+
   tasks:
   - name: Add Windows credentials
     awx.awx.credential:
@@ -17,14 +20,14 @@
       credential_type: Machine
       organization: Default
       inputs:
-        username: {{ win_username }}
-        password: {{ win_password }}
-      
+        username: "{{ win_username }}"
+        password: "{{ win_password }}"
+
   - name: Add EE to controller
     awx.awx.execution_environment:
       name: "Win EE"
       image: quay.io/jboivie/win_ee:latest
-      
+
   - name: AWX Project
     awx.awx.project:
       name: ansible-demo
@@ -35,4 +38,3 @@
       scm_delete_on_update: True
       scm_type: git
       scm_url: https://github.com/forenkla/ansible-demo.git
-      
