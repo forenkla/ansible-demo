@@ -43,52 +43,52 @@
       scm_type: git
       scm_url: https://github.com/forenkla/ansible-demo.git
       
-   - name: AWX Job Template
-     awx.awx.job_template:
-       name: Install IIS
-       organization: Default
-       state: present
-       inventory: "{{ inventory_name }}"
-       playbook: install_iis.yml
-       project: ansible-demo
-       credential: Windows credentials
+  - name: AWX Job Template
+    awx.awx.job_template:
+      name: Install IIS
+      organization: Default
+      state: present
+      inventory: "{{ inventory_name }}"
+      playbook: install_iis.yml
+      project: ansible-demo
+      credential: Windows credentials
 
-   - name: AWX Job Template
-     awx.awx.job_template:
-       name: Setup multiple IIS sites
-       organization: Default
-       state: present
-       inventory: "{{ inventory_name }}"
-       playbook: multiple_iis_sites.yml
-       project: ansible-demo
-       credential: Windows credentials
-       
-    - name: AWX Job Template
-      awx.awx.job_template:
-        name: Install Git with Chocolatey
-        organization: Default
-        state: present
-        inventory: "{{ inventory_name }}"
-        playbook: install_chocolatey.yml
-        project: ansible-demo
-        credential: Windows credentials
-        
-    - name: AWX Job Template
-      awx.awx.job_template:
-        name: Verify the WSMan HTTP listener
-        organization: Default
-        state: present
-        inventory: "{{ inventory_name }}"
-        playbook: verify_http_with_powershell.yml 
-        project: ansible-demo
-        credential: Windows credentials
-        
-    - name: AWX Job Template
-      awx.awx.job_template:
-        name: Change legal message with Regedit
-        organization: Default
-        state: present
-        inventory: "{{ inventory_name }}"
-        playbook: legal_message_regedit.yml 
-        project: ansible-demo
-        credential: Windows credentials
+  - name: AWX Job Template
+    awx.awx.job_template:
+      name: Setup multiple IIS sites
+      organization: Default
+      state: present
+      inventory: "{{ inventory_name }}"
+      playbook: multiple_iis_sites.yml
+      project: ansible-demo
+      credential: Windows credentials
+      
+  - name: AWX Job Template
+    awx.awx.job_template:
+      name: Install Git with Chocolatey
+      organization: Default
+      state: present
+      inventory: "{{ inventory_name }}"
+      playbook: install_chocolatey.yml
+      project: ansible-demo
+      credential: Windows credentials
+      
+  - name: AWX Job Template
+    awx.awx.job_template:
+      name: Verify the WSMan HTTP listener
+      organization: Default
+      state: present
+      inventory: "{{ inventory_name }}"
+      playbook: verify_http_with_powershell.yml 
+      project: ansible-demo
+      credential: Windows credentials
+      
+  - name: AWX Job Template
+    awx.awx.job_template:
+      name: Change legal message with Regedit
+      organization: Default
+      state: present
+      inventory: "{{ inventory_name }}"
+      playbook: legal_message_regedit.yml 
+      project: ansible-demo
+      credential: Windows credentials
