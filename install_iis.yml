@@ -1,19 +1,23 @@
-tasks:
- - name: install iis
-   win_feature:
-     name: Web-Server
-     state: present
+---
+- name: Install the IIS web service
+  hosts: windows
 
- - name: start iis service
-   win_service:
-     name: W3Svc
-     state: started
+  tasks:
+    - name: Install IIS
+      win_feature:
+        name: Web-Server
+        state: present
 
- - name: Create website index.html
-   win_copy:
-     content: "{{ iis_test_message }}"
-     dest: C:\Inetpub\wwwroot\index.html
+    - name: Start IIS service
+      win_service:
+        name: W3Svc
+        state: started
 
- - name: Show website address
-   debug:
-     msg: "http://{{ ansible_host }}"
+    - name: Create website index.html
+      win_copy:
+        content: "{{ iis_test_message }}"
+        dest: C:\Inetpub\wwwroot\index.html
+
+    - name: Show website address
+      debug:
+        msg: http://{{ ansible_host }}
