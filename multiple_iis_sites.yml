@@ -1,5 +1,6 @@
 ---
 - name: Create multiple IIS sites
+  hosts: windows
   vars:
     iis_sites:
       - name: 'Ansible Playbook Test'
