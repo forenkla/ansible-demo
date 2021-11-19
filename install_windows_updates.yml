@@ -1,5 +1,5 @@
 ---
-- name: Install the IIS web service
+- name: Install Windows security updates
   hosts: windows
 
   tasks:
