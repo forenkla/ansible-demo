@@ -6,12 +6,12 @@
   tasks:
     - name: Updating Legal Notice Title
       win_regedit:
-        path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\Policies\System
         name: legalnoticecaption
         data: "{{ title_legal_notice }}"
 
     - name: Updating Legal Notice Text
       win_regedit:
-        path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\Policies\System
         name: legalnoticetext
         data: "{{ text_legal_notice }}"
