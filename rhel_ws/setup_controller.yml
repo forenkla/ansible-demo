@@ -148,3 +148,43 @@
             failure_nodes: []
             always_nodes: []
             credentials: []
+            
+  - name: Add group Webserver with stage dev variable
+    awx.awx.group:
+      name: Webserver
+      description: "Webserver group"
+      inventory: "Workshop Inventory"
+      state: present
+      variables:
+        stage: dev
+      hosts:
+        - node1
+        - node2
+        - node3
+
+  - name: Add host node2 with stage prod variable
+    awx.awx.host:
+      name: node2
+      description: "imported"
+      inventory: "Workshop Inventory"
+      state: present
+      variables:
+        ansible_host: "{{ node2_ip }}"
+        stage: prod
+
+  - name: Add Job Template Create Web Content
+    awx.awx.job_template:
+      name: "Create Web Content"
+      organization: Default
+      state: present
+      inventory: "Workshop Inventory"
+      execution_environment: "Default execution environment"
+      playbook: rhel/apache/webcontent.yml
+      project: "Workshop Project"
+      credential: "Workshop Credential"
+      become_enabled: yes
+      survey_enabled: yes
+      survey_spec: "{{ lookup('file', 'survey2.json') }}"
+      extra_vars:
+        dev_content: "default dev content"
+        prod_content: "default prod content"
