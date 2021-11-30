@@ -3,7 +3,12 @@
   hosts: localhost
   become: false
   gather_facts: false
-
+  
+  vars_prompt:
+    - name: node2_ip
+      prompt: Enter IP of node2 (for Wrap up exercise)
+      private: no
+      
   tasks:
   - name: Setup Workshop Project
     awx.awx.project:
