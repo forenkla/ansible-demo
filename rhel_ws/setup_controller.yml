@@ -11,8 +11,6 @@
       organization: Default
       default_environment: "Default execution environment"
       state: present
-      scm_update_on_launch: True
-      scm_delete_on_update: True
       scm_type: git
       scm_url: https://github.com/ansible/workshop-examples.git
       scm_clean: yes
@@ -64,3 +62,89 @@
       job_templates:
         - "Create index.html"
       state: present
+
+  - name: Setup Webops Git Repo
+    awx.awx.project:
+      name: "Webops Git Repo"
+      organization: Default
+      default_environment: "Default execution environment"
+      state: present
+      scm_update_on_launch: True
+      scm_delete_on_update: True
+      scm_type: git
+      scm_url: https://github.com/ansible/workshop-examples.git
+      scm_branch: webops
+      scm_clean: yes
+      scm_delete_on_update: yes
+      scm_update_on_launch: yes
+
+  - name: Setup Webdev Git Repo
+    awx.awx.project:
+      name: "Webdev Git Repo"
+      organization: Default
+      default_environment: "Default execution environment"
+      state: present
+      scm_update_on_launch: True
+      scm_delete_on_update: True
+      scm_type: git
+      scm_url: https://github.com/ansible/workshop-examples.git
+      scm_branch: webdev
+      scm_clean: yes
+      scm_delete_on_update: yes
+      scm_update_on_launch: yes
+
+  - name: Add Job Template Web App Deploy
+    awx.awx.job_template:
+      name: "Web App Deploy"
+      organization: Default
+      state: present
+      inventory: "Workshop Inventory"
+      execution_environment: "Default execution environment"
+      playbook: rhel/webops/web_infrastructure.yml
+      project: "Webops Git Repo"
+      credential: "Workshop Credential"
+      limit: web
+      become_enabled: yes
+
+  - name: Add Job Template Node.js Deploy
+    awx.awx.job_template:
+      name: "Node.js Deploy"
+      organization: Default
+      state: present
+      inventory: "Workshop Inventory"
+      execution_environment: "Default execution environment"
+      playbook: rhel/webdev/install_node_app.yml
+      project: "Webdev Git Repo"
+      credential: "Workshop Credential"
+      limit: web
+      become_enabled: yes
+
+  - name: Setup Workflow Deploy Webapp Server
+    awx.awx.workflow_job_template:
+      name: Deploy Webapp Server
+      schema:
+        - identifier: node101
+          unified_job_template:
+            name: "Web App Deploy"
+            inventory:
+              organization:
+                name: Default
+            type: inventory_source
+          related:
+            success_nodes:
+              - identifier: node201
+            failure_nodes: []
+            always_nodes: []
+            credentials: []
+        - identifier: node201
+          unified_job_template:
+            organization:
+              name: Default
+            name: "Node.js Deploy"
+            type: job_template
+          credentials: []
+          related:
+            success_nodes: []
+            failure_nodes: []
+            always_nodes: []
+            credentials: []
