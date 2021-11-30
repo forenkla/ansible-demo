@@ -7,9 +7,6 @@
         "question_name": "First Line",
         "question_description": "Enter text for first line.",
         "variable": "first_line",
-        "choices": "",
-        "min": "",
-        "max": "",
         "required": true,
         "default": "This is the first line"
         },
@@ -18,9 +15,6 @@
         "question_name": "Second Line",
         "question_description": "Enter text for second line.",
         "variable": "second_line",
-        "choices": "",
-        "min": "",
-        "max": "",
         "required": true,
         "default": "This is the second line"
         }
