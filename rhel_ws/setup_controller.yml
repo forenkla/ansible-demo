@@ -1,0 +1,75 @@
+---
+- name: Setup ansible-demo project to controller
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  vars_prompt:
+    - name: win_username
+      prompt: Enter username for Windows host
+      private: no
+
+    - name: win_password
+      prompt: Enter password for Windows host
+      private: no
+      
+    - name: inventory_name
+      prompt: Enter name of the inventory
+      private: no
+
+  tasks:
+  - name: Add Windows credentials
+    awx.awx.credential:
+      name: Windows credentials
+      credential_type: Machine
+      organization: Default
+      inputs:
+        username: "{{ win_username }}"
+        password: "{{ win_password }}"
+
+  - name: Add EE to controller
+    awx.awx.execution_environment:
+      name: "Win EE"
+      image: quay.io/jboivie/win_ee:latest
+
+  - name: Setup Workshop Project
+    awx.awx.project:
+      name: "Workshop Project"
+      organization: Default
+      default_environment: "Default execution environment"
+      state: present
+      scm_update_on_launch: True
+      scm_delete_on_update: True
+      scm_type: git
+      scm_url: https://github.com/ansible/workshop-examples.git
+      scm_clean: yes
+      scm_delete_on_update: yes
+      scm_update_on_launch: yes
+      
+  - name: Add Job Template Install Apache
+    awx.awx.job_template:
+      name: "Install Apache"
+      organization: Default
+      state: present
+      inventory: "Workshop Inventory"
+      execution_environment: "Default execution environment"
+      playbook: rhel/apache/apache_install.yml
+      project: "Workshop Project"
+      credential: "Workshop Credential"
+      limit: web
+      become_enabled: yes
+
+  - name: Add Job Template Create index.html
+    awx.awx.job_template:
+      name: "Create index.html"
+      organization: Default
+      state: present
+      inventory: "Workshop Inventory"
+      playbook: rhel/apache/apache_role_install.yml
+      project: "Workshop Project"
+      credential: "Workshop Credential"
+      limit: web
+      become_enabled: yes
+      survey_enabled: yes
+      survey_spec: "{{ lookup('file', 'survey.json') }}"
+      
