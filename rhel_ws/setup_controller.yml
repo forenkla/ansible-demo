@@ -46,3 +46,13 @@
       survey_enabled: yes
       survey_spec: "{{ lookup('file', 'survey.json') }}"
       
+  - name: Add user Werner Web
+    user:
+      username: wweb
+      password: ansible
+      email: wweb@example.com
+      first_name: Werner
+      last_name: Web
+      is_superuser: no
+      is_system_auditor: no
+      state: present
