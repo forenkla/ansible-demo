@@ -3,7 +3,8 @@
   hosts: localhost
   become: false
   gather_facts: false
-
+  
+  tasks:
   - name: Setup Workshop Project
     awx.awx.project:
       name: "Workshop Project"
@@ -43,5 +44,5 @@
       limit: web
       become_enabled: yes
       survey_enabled: yes
-      survey_spec: "{{ lookup('file', 'survey.yaml') }}"
+      survey_spec: "{{ lookup('file', 'survey.json') }}"
       
