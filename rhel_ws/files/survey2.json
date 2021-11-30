@@ -1,0 +1,22 @@
+{
+    "name": "Create Web Content Survey",
+    "description": "Survey for Create Web Content job template",
+    "spec": [
+        {
+        "type": "text",
+        "question_name": "What should the value of dev_content be?",
+        "question_description": "",
+        "variable": "dev_content",
+        "required": true,
+        "default": "Development Content"
+        },
+        {
+        "type": "text",
+        "question_name": "What should the value of prod_content be?",
+        "question_description": "",
+        "variable": "prod_content",
+        "required": true,
+        "default": "Production Content"
+        }
+    ]
+}
