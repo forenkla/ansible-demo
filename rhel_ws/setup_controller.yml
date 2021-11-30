@@ -4,11 +4,6 @@
   become: false
   gather_facts: false
 
-  - name: Add EE to controller
-    awx.awx.execution_environment:
-      name: "Win EE"
-      image: quay.io/jboivie/win_ee:latest
-
   - name: Setup Workshop Project
     awx.awx.project:
       name: "Workshop Project"
