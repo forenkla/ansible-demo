@@ -3,7 +3,7 @@
   hosts: localhost
   become: false
   gather_facts: false
-  
+
   tasks:
   - name: Setup Workshop Project
     awx.awx.project:
@@ -18,7 +18,7 @@
       scm_clean: yes
       scm_delete_on_update: yes
       scm_update_on_launch: yes
-      
+
   - name: Add Job Template Install Apache
     awx.awx.job_template:
       name: "Install Apache"
@@ -45,7 +45,7 @@
       become_enabled: yes
       survey_enabled: yes
       survey_spec: "{{ lookup('file', 'survey.json') }}"
-      
+
   - name: Add user Werner Web
     awx.awx.user:
       username: wweb
@@ -56,14 +56,11 @@
       is_superuser: no
       is_system_auditor: no
       state: present
-      
+
   - name: Add Joe to multiple job templates and a workflow
-    role:
+    awx.awx.role:
       user: wweb
-      role:
-        - read
-        - execute
+      role: execute
       job_templates:
         - "Create index.html"
       state: present
-
