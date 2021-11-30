@@ -1,0 +1,16 @@
+---
+name: Create index.html Survey
+description: Survey for Create index.html job template
+spec:
+- type: text
+  question_name: First Line
+  question_description: Enter text for first line.
+  variable: first_line
+  required: true
+  default: This is the first line
+- type: text
+  question_name: Second Line
+  question_description: Enter text for second line.
+  variable: second_line
+  required: true
+  default: This is the second line
