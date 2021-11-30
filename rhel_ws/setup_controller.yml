@@ -74,8 +74,6 @@
       organization: Default
       default_environment: "Default execution environment"
       state: present
-      scm_update_on_launch: True
-      scm_delete_on_update: True
       scm_type: git
       scm_url: https://github.com/ansible/workshop-examples.git
       scm_branch: webops
@@ -89,8 +87,6 @@
       organization: Default
       default_environment: "Default execution environment"
       state: present
-      scm_update_on_launch: True
-      scm_delete_on_update: True
       scm_type: git
       scm_url: https://github.com/ansible/workshop-examples.git
       scm_branch: webdev
