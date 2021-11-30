@@ -47,7 +47,7 @@
       survey_spec: "{{ lookup('file', 'survey.json') }}"
       
   - name: Add user Werner Web
-    user:
+    awx.awx.user:
       username: wweb
       password: ansible
       email: wweb@example.com
