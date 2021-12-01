@@ -13,3 +13,5 @@ export CONTROLLER_VERIFY_SSL=false
 # install collection for automation Ansible Controller
 ansible-galaxy collection install awx.awx
 ansible-galaxy collection install community.general
+
+echo -e "[defaults]\n\nstdout_callback = community.general.yaml" > .ansible.cfg
