@@ -1,5 +1,6 @@
 ---
 - name: Apache server installed
+  hosts: stealth-host
   become: yes
   tasks:
   - name: latest Apache version installed
