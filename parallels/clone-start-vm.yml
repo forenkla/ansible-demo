@@ -7,7 +7,7 @@
   tasks:
   - name: Clone the "centos-stream-template" VM
     ansible.builtin.shell:
-      cmd: prlctl clone centos-stream-template --name centos-stream-template-clone
+      cmd: /usr/local/bin/prlctl clone centos-stream-template --name centos-stream-template-clone
   - name: Start the new VM
     ansible.builtin.shell:
-      cmd: prlctl start centos-stream-template-clone
+      cmd: /usr/local/bin/prlctl start centos-stream-template-clone
