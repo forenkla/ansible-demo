@@ -11,3 +11,7 @@
   - name: Enable code-server
     ansible.builtin.shell:
       cmd: systemctl enable --now code-server@root
+  - name: Install latest Git
+    dnf:
+      name: git
+      state: latest
