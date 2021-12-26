@@ -10,4 +10,4 @@
       cmd: curl -fsSL https://code-server.dev/install.sh | sh
   - name: Enable code-server
     ansible.builtin.shell:
-      cmd: systemctl enable --now code-server@$root
+      cmd: systemctl enable --now code-server@root
