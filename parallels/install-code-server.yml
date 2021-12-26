@@ -1,5 +1,5 @@
 ---
-- name: Provision CentOS VM for dev environment
+- name: Install code-server, setup Git
   hosts: centos-stream-template-clone
   become: yes
   gather_facts: false
