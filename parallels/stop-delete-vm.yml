@@ -8,6 +8,6 @@
   - name: Shutdown the "centos-stream-template-clone" VM
     ansible.builtin.shell:
       cmd: /usr/local/bin/prlctl stop centos-stream-template-clone
-  - name: Start the new VM
+  - name: Delete the new VM
     ansible.builtin.shell:
       cmd: /usr/local/bin/prlctl delete centos-stream-template-clone
