@@ -11,4 +11,4 @@
     inventory: "Home Inventory"
     state: present
     variables:
-      ansible_host: {{ centos-stream-template-clone-ip }}
+      ansible_host: {{ centos_clone_ip }}
