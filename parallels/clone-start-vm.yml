@@ -15,3 +15,6 @@
     ansible.builtin.shell:
       cmd: /usr/local/bin/prlctl exec "centos-stream-template-clone" ip -4 -br addr show enp0s5 | awk '{print $3}' | cut -d / -f 1
     register: clone_ip
+  - name: IP address of centos-stream-template-clone
+    ansible.builtin.debug:
+      msg: {{ clone_ip }}
