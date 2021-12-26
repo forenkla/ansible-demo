@@ -27,9 +27,6 @@
   - name: Download and Install code-server
     ansible.builtin.shell:
       cmd: curl -fsSL https://code-server.dev/install.sh | sh
-  - name: Enable code-server
-    ansible.builtin.shell:
-      cmd: systemctl enable --now code-server@jboivie
   - name: Set code-server password
     template:
         src: code-server-config.j2
@@ -37,6 +34,9 @@
         owner: jboivie
         group: jboivie
         mode: 0644
+  - name: Enable code-server
+    ansible.builtin.shell:
+      cmd: systemctl enable --now code-server@jboivie
   - name: Install latest Git
     dnf:
       name: git
