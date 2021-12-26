@@ -5,7 +5,7 @@
   gather_facts: false
   
 - name: Add host centos-stream-template-clone
-  host:
+  awx.awx.host:
     name: centos-stream-template-clone
     description: ""
     inventory: "Home Inventory"
