@@ -34,5 +34,9 @@
     dnf:
       name: git
       state: latest
+  - name: Set git user email
+    ansible.builtin.shell: runuser -l jboivie -c "git config --global user.email {{ git_email }}"
+  - name: Set git user name
+    ansible.builtin.shell: runuser -l jboivie -c "git config --global user.name {{ git_user }}"
   - name: Clone this project from Git
     ansible.builtin.shell: runuser -l jboivie -c "git clone https://{{ the_secret | trim }}@github.com/forenkla/ansible-demo.git /home/jboivie/projects"
