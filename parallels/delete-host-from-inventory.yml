@@ -1,0 +1,13 @@
+---
+- name: Remove centos-stream-template-clone from controller inventory
+  hosts: ansible1
+  become: false
+  gather_facts: false
+  
+  tasks:
+  - name: Remove host centos-stream-template-clone
+    awx.awx.host:
+      name: centos-stream-template-clone
+      description: ""
+      inventory: "Home Inventory"
+      state: absent
