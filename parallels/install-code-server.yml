@@ -35,6 +35,6 @@
       name: git
       state: latest
   - name: Clone this project from Git
-    ansible.builtin.shell: runuser -l jboivie git clone https://{{ the_secret | trim }}@github.com/forenkla/ansible-demo.git
+    ansible.builtin.shell: runuser -l jboivie -c "git clone https://{{ the_secret | trim }}@github.com/forenkla/ansible-demo.git"
     args:
       chdir: /home/jboivie/projects
