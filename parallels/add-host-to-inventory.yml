@@ -4,11 +4,12 @@
   become: false
   gather_facts: false
   
-- name: Add host centos-stream-template-clone
-  awx.awx.host:
-    name: centos-stream-template-clone
-    description: ""
-    inventory: "Home Inventory"
-    state: present
-    variables:
-      ansible_host: "{{ centos_clone_ip }}"
+  tasks:
+  - name: Add host centos-stream-template-clone
+    awx.awx.host:
+      name: centos-stream-template-clone
+      description: ""
+      inventory: "Home Inventory"
+      state: present
+      variables:
+        ansible_host: "{{ centos_clone_ip }}"
