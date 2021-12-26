@@ -5,13 +5,13 @@
   gather_facts: false
   vars:
     the_secret: !vault |
-                "$ANSIBLE_VAULT;1.1;AES256
+                $ANSIBLE_VAULT;1.1;AES256
                 33376537353436386161653735313961633334326138386563313433343963343332653562653934
                 3461613838343433386264396233663331363137376235660a303063666464343063663634323735
                 64656431326239326163643766363061613533343134643335623135623664616232393835353765
                 3430383538343165350a653938616663633236376231383562666665303636343230613636663633
                 38323636383637646239373236633963333434313930316538393962366132366363363534393732
-                6634653863346565643062386437643936376465663534393438"
+                6634653863346565643062386437643936376465663534393438
   tasks:
   - name: Add the user 'jboivie'
     ansible.builtin.user:
@@ -35,6 +35,6 @@
       name: git
       state: latest
   - name: Clone this project from Git
-    ansible.builtin.shell: git clone https://{{ the_secret }}@github.com/forenkla/ansible-demo.git
+    ansible.builtin.shell: git clone https://{{ the_secret | trim }}@github.com/forenkla/ansible-demo.git
     args:
       chdir: /home/jboivie/projects
