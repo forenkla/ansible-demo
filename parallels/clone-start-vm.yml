@@ -13,7 +13,7 @@
       cmd: /usr/local/bin/prlctl start centos-stream-template-clone
   - name: Wait 20s for VM to start
     wait_for:
-      timeout: 20
+      timeout: 30
     delegate_to: localhost
   - name: Get IP address of centos-stream-template-clone
     ansible.builtin.shell:
