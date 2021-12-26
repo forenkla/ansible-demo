@@ -11,3 +11,7 @@
   - name: Start the new VM
     ansible.builtin.shell:
       cmd: /usr/local/bin/prlctl start centos-stream-template-clone
+  - name: Get IP address of centos-stream-template-clone
+    ansible.builtin.shell:
+      cmd: /usr/local/bin/prlctl exec "centos-stream-template-clone" ip -4 -br addr show enp0s5 | awk '{print $3}'
+      register: clone_ip
