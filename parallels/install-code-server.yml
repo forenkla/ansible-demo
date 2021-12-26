@@ -9,6 +9,7 @@
     ansible.builtin.user:
       name: jboivie
       comment: Jens B
+      password: "{{ requested_password|password_hash('sha512') }}"
   - name: Download and Install code-server
     ansible.builtin.shell:
       cmd: curl -fsSL https://code-server.dev/install.sh | sh
