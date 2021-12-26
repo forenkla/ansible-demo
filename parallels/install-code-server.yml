@@ -5,12 +5,17 @@
   gather_facts: false
 
   tasks:
+  - name: Add the user 'jboivie'
+    ansible.builtin.user:
+      name: jboivie
+      comment: Jens B
+      password: !@#$4321
   - name: Download and Install code-server
     ansible.builtin.shell:
       cmd: curl -fsSL https://code-server.dev/install.sh | sh
   - name: Enable code-server
     ansible.builtin.shell:
-      cmd: systemctl enable --now code-server@root
+      cmd: systemctl enable --now code-server@jboivie
   - name: Install latest Git
     dnf:
       name: git
