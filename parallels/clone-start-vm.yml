@@ -22,3 +22,7 @@
   - name: IP address of centos-stream-template-clone
     ansible.builtin.debug:
       msg: "{{ clone_ip.stdout }}"
+  - name: "Artifact URL of test results to Tower Workflows"
+    ansible.builtin.set_stats:
+      data:
+        centos-stream-template-clone-ip:  "{{ clone_ip.stdout }}"
