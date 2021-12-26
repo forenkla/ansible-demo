@@ -1,7 +1,7 @@
 ---
 - name: Provision CentOS VM for dev environment
   hosts: MacBook-Pro
-  become: yes
+  become: no
   gather_facts: false
 
   tasks:
