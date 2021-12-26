@@ -1,0 +1,14 @@
+---
+- name: Add centos-stream-template-clone to controller inventory
+  hosts: ansible1
+  become: false
+  gather_facts: false
+  
+- name: Add host centos-stream-template-clone
+  host:
+    name: centos-stream-template-clone
+    description: ""
+    inventory: "Home Inventory"
+    state: present
+    variables:
+      ansible_host: {{ centos-stream-template-clone-ip }}
