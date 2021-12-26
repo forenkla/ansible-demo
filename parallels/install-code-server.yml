@@ -9,7 +9,6 @@
     ansible.builtin.user:
       name: jboivie
       comment: Jens B
-      password: "!@#$4321"
   - name: Download and Install code-server
     ansible.builtin.shell:
       cmd: curl -fsSL https://code-server.dev/install.sh | sh
