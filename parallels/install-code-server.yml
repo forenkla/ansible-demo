@@ -1,0 +1,13 @@
+---
+- name: Provision CentOS VM for dev environment
+  hosts: centos-stream-template-clone
+  become: yes
+  gather_facts: false
+
+  tasks:
+  - name: Clone the "centos-stream-template" VM
+    ansible.builtin.shell:
+      cmd: curl -fsSL https://code-server.dev/install.sh | sh
+  - name: Clone the "centos-stream-template" VM
+    ansible.builtin.shell:
+      cmd: systemctl enable --now code-server@$root
