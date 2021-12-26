@@ -1,6 +1,6 @@
 ---
 - name: Add centos-stream-template-clone to controller inventory
-  hosts: localhost
+  hosts: ansible1
   become: false
   gather_facts: false
   
