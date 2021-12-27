@@ -55,6 +55,8 @@
         - ansible-core
         - ansible-navigator
         - ansible-builder
+    become: yes
+    become_user: jboivie
   - name: Install latest Git
     dnf:
       name: git
