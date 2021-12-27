@@ -52,6 +52,12 @@
       owner: jboivie
       group: jboivie
       mode: 0644
+  - name: Create ansible-demo directory
+    ansible.builtin.file:
+      path: /home/jboivie/projects/ansible-demo
+      state: directory
+      owner: jboivie
+      mode: '0755'
   - name: Clone ansible-demo project
     ansible.builtin.git:
       repo: https://{{ the_secret | trim }}@github.com/forenkla/ansible-demo.git
