@@ -45,6 +45,10 @@
     dnf:
       name: python39
       state: latest
+  - name: Install Python venv
+    dnf:
+      name: virtualenv
+      state: latest
   - name: Install Podman
     dnf:
       name: podman
