@@ -43,7 +43,7 @@
       cmd: systemctl restart --now code-server@jboivie
   - name: Install Python
     dnf:
-      name: python
+      name: python39
       state: latest
   - name: Install Podman
     dnf:
