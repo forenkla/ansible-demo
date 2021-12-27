@@ -49,12 +49,10 @@
     dnf:
       name: podman
       state: latest
-  - name: Install ansible-navigator, ansible-builder, ansible-core
+  - name: Install ansible-navigator
     pip:
-      name:
-        - ansible-core
-        - ansible-navigator
-        - ansible-builder
+      name: ansible-navigator
+      state: present
     become: yes
     become_user: jboivie
   - name: Install latest Git
