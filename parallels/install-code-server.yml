@@ -52,16 +52,12 @@
       owner: jboivie
       group: jboivie
       mode: 0644
-  - name: Create ansible-demo directory
-    ansible.builtin.file:
-      path: /home/jboivie/projects/ansible-demo
-      state: directory
-      owner: jboivie
-      mode: '0755'
   - name: Clone ansible-demo project
     ansible.builtin.git:
       repo: https://{{ the_secret | trim }}@github.com/forenkla/ansible-demo.git
       dest: /home/jboivie/projects/ansible-demo
+    become: yes
+    become_user: jboivie
   # - name: Set git user email
   #   ansible.builtin.shell: runuser -l jboivie -c "git config --global user.email {{ git_email }}"
   # - name: Set git user name
