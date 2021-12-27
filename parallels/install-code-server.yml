@@ -17,6 +17,7 @@
     ansible.builtin.user:
       name: jboivie
       comment: Jens B
+      group: wheel
       password: "{{ requested_password|password_hash('sha512') }}"
   - name: Create projects directory
     ansible.builtin.file:
