@@ -61,10 +61,6 @@
     pip:
       name: ansible-builder
       state: present
-  - name: Install ansible-navigator
-    pip:
-      name: ansible-core
-      state: present
   - name: Install latest Git
     dnf:
       name: git
