@@ -45,12 +45,23 @@
     dnf:
       name: git
       state: latest
-  - name: Set git user email
-    ansible.builtin.shell: runuser -l jboivie -c "git config --global user.email {{ git_email }}"
-  - name: Set git user name
-    ansible.builtin.shell: runuser -l jboivie -c "git config --global user.name {{ git_user }}"
-  - name: Clone this project from Git
-    ansible.builtin.shell: runuser -l jboivie -c "git clone https://{{ the_secret | trim }}@github.com/forenkla/ansible-demo.git /home/jboivie/projects/ansible-demo"
+  - name: Apply Git config
+    template:
+      src: git-config.j2
+      dest: /home/jboivie/.gitconfig
+      owner: jboivie
+      group: jboivie
+      mode: 0644
+  - name: Clone ansible-demo project
+    ansible.builtin.git:
+      repo: https://{{ the_secret | trim }}@github.com/forenkla/ansible-demo.git
+      dest: /home/jboivie/projects/ansible-demo
+  # - name: Set git user email
+  #   ansible.builtin.shell: runuser -l jboivie -c "git config --global user.email {{ git_email }}"
+  # - name: Set git user name
+  #   ansible.builtin.shell: runuser -l jboivie -c "git config --global user.name {{ git_user }}"
+  # - name: Clone this project from Git
+  #   ansible.builtin.shell: runuser -l jboivie -c "git clone https://{{ the_secret | trim }}@github.com/forenkla/ansible-demo.git /home/jboivie/projects/ansible-demo"
   
   - name: Paste into to Terminal for access via http://localhost:8080
     ansible.builtin.debug:
