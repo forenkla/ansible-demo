@@ -50,3 +50,7 @@
     ansible.builtin.shell: runuser -l jboivie -c "git config --global user.name {{ git_user }}"
   - name: Clone this project from Git
     ansible.builtin.shell: runuser -l jboivie -c "git clone https://{{ the_secret | trim }}@github.com/forenkla/ansible-demo.git /home/jboivie/projects/ansible-demo"
+  
+  - name: Paste into to Terminal for access via http://localhost:8080
+    ansible.builtin.debug:
+      msg: "ssh -N -L 8080:127.0.0.1:8080 jboivie@{{ centos_clone_ip }}"
