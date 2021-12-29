@@ -1,6 +1,6 @@
 ---
 - name: Install code-server, setup Git
-  hosts: centos-stream-template-clone
+  hosts: "{{ centos_hostname }}"
   become: yes
   gather_facts: false
   vars:
