@@ -22,7 +22,7 @@
   - name: "IP address of centos-stream-{{ dev_username }}"
     ansible.builtin.debug:
       msg: "{{ clone_ip.stdout }}"
-  - name: "Artifact URL of test results to Tower Workflows"
+  - name: "Set some stats variables"
     ansible.builtin.set_stats:
       data:
         centos_clone_ip:  "{{ clone_ip.stdout }}"
