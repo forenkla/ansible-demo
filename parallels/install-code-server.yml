@@ -70,13 +70,13 @@
   - name: Login to Private Automation Hub registry
     ansible.builtin.shell:
       cmd: "podman login --tls-verify=false -u admin -p {{ registry_pw }} 192.168.1.36"
-      become: yes
-      become_user: "{{ dev_username }}"
+    become: yes
+    become_user: "{{ dev_username }}"
   - name: Pull execution environments (cause navigator doesn't support --tls-verify=false)
     ansible.builtin.shell:
       cmd: "podman pull --tls-verify=false {{ item }}"
-      become: yes
-      become_user: "{{ dev_username }}"
+    become: yes
+    become_user: "{{ dev_username }}"
     loop:
       - "192.168.1.36/win_ee"
       - "192.168.1.36/ee-supported-rhel8"
