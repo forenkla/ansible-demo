@@ -5,9 +5,9 @@
   gather_facts: false
 
   tasks:
-  - name: Shutdown the "centos-stream-template-clone" VM
+  - name: "Shutdown the {{ centos_hostname }} VM"
     ansible.builtin.shell:
-      cmd: /usr/local/bin/prlctl stop centos-stream-template-clone
+      cmd: "/usr/local/bin/prlctl stop {{ centos_hostname }}"
   - name: Delete the new VM
     ansible.builtin.shell:
-      cmd: /usr/local/bin/prlctl delete centos-stream-template-clone
+      cmd: "/usr/local/bin/prlctl delete {{ centos_hostname }}"
