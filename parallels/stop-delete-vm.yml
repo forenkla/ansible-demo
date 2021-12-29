@@ -11,3 +11,7 @@
   - name: Delete the new VM
     ansible.builtin.shell:
       cmd: "/usr/local/bin/prlctl delete {{ centos_hostname }}"
+  - name: "Stats variable for hostname"
+    ansible.builtin.set_stats:
+      data:
+        centos_hostname: "{{ centos_hostname }}"
