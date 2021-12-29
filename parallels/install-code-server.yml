@@ -13,6 +13,10 @@
                 38323636383637646239373236633963333434313930316538393962366132366363363534393732
                 6634653863346565643062386437643936376465663534393438
   tasks:
+  - name: "Set a Linux hostname to {{ centos_hostname }}"
+    ansible.builtin.hostname:
+      name: "{{ centos_hostname }}"
+      use: systemd
   - name: "Add the user {{ dev_username }}"
     ansible.builtin.user:
       name: "{{ dev_username }}"
