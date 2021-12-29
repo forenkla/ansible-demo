@@ -96,7 +96,7 @@
       repo: https://{{ the_secret | trim }}@github.com/forenkla/ansible-config.git
       dest: "/home/{{ dev_username }}/projects/ansible-config"
     become: yes
-    become_user: "{{ dev_username }}""
+    become_user: "{{ dev_username }}"
   - name: Paste into to Terminal for access via http://localhost:8080
     ansible.builtin.debug:
       msg: "ssh -N -L 8080:127.0.0.1:8080 {{ dev_username }}@{{ centos_clone_ip }}"
