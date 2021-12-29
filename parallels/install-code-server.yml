@@ -75,9 +75,9 @@
   - name: Apply Git config
     template:
       src: git-config.j2
-      dest: /home/{{ dev_username }}/.gitconfig
-      owner: {{ dev_username }}
-      group: {{ dev_username }}
+      dest: "/home/{{ dev_username }}/.gitconfig"
+      owner: "{{ dev_username }}"
+      group: "{{ dev_username }}"
       mode: 0644
   - name: Clone ansible-demo project
     ansible.builtin.git:
