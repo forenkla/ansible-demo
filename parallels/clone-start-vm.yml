@@ -7,19 +7,19 @@
   tasks:
   - name: Clone the "centos-stream-template" VM
     ansible.builtin.shell:
-      cmd: /usr/local/bin/prlctl clone centos-stream-template --name centos-stream-template-clone
-  - name: Start the new VM
+      cmd: "/usr/local/bin/prlctl clone centos-stream-template --name centos-stream-{{ dev_username }}"
+  - name: "Start the new VM centos-stream-{{ dev_username }}"
     ansible.builtin.shell:
-      cmd: /usr/local/bin/prlctl start centos-stream-template-clone
+      cmd: "/usr/local/bin/prlctl start centos-stream-{{ dev_username }}"
   - name: Wait 20s for VM to start
     wait_for:
       timeout: 20
     delegate_to: localhost
-  - name: Get IP address of centos-stream-template-clone
+  - name: "Get IP address of centos-stream-{{ dev_username }}"
     ansible.builtin.shell:
-      cmd: /usr/local/bin/prlctl exec "centos-stream-template-clone" ip -4 -br addr show enp0s5 | awk '{print $3}' | cut -d / -f 1
+      cmd: /usr/local/bin/prlctl exec "centos-stream-{{ dev_username }}" ip -4 -br addr show enp0s5 | awk '{print $3}' | cut -d / -f 1
     register: clone_ip
-  - name: IP address of centos-stream-template-clone
+  - name: "IP address of centos-stream-{{ dev_username }}"
     ansible.builtin.debug:
       msg: "{{ clone_ip.stdout }}"
   - name: "Artifact URL of test results to Tower Workflows"
