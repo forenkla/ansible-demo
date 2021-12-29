@@ -12,6 +12,13 @@
                 3430383538343165350a653938616663633236376231383562666665303636343230613636663633
                 38323636383637646239373236633963333434313930316538393962366132366363363534393732
                 6634653863346565643062386437643936376465663534393438
+    registry_pw: !vault |
+                $ANSIBLE_VAULT;1.1;AES256
+                30373733333732636662313737666639323235626132303261316462333632316332393236663635
+                3933323036333630363535336438613837333931306161390a346436616333343631363762316161
+                62373161613136383962633864313161336461303161633136386565633334646636333731353236
+                6236636233353530360a303463373136343164303539396566313633306366653632333336633464
+                65333166653538346166663761303465653737646334373263323162643539666438
   tasks:
   - name: "Set a Linux hostname to {{ centos_hostname }}"
     ansible.builtin.hostname:
@@ -60,6 +67,21 @@
     dnf:
       name: podman
       state: latest
+  - name: Login to Private Automation Hub registry
+    ansible.builtin.shell:
+      cmd: "podman login --tls-verify=false -u admin -p {{ registry_pw }} 192.168.1.36"
+      become: yes
+      become_user: "{{ dev_username }}"
+  - name: Pull execution environments (cause navigator doesn't support --tls-verify=false)
+    ansible.builtin.shell:
+      cmd: "podman pull --tls-verify=false {{ item }}"
+      become: yes
+      become_user: "{{ dev_username }}"
+    loop:
+      - "192.168.1.36/win_ee"
+      - "192.168.1.36/ee-supported-rhel8"
+      - "192.168.1.36/ee-29-rhel8"
+      - "192.168.1.36/ee-minimal-rhel8"
   - name: Install ansible-navigator
     pip:
       name: ansible-navigator
