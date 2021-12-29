@@ -5,9 +5,9 @@
   gather_facts: false
   
   tasks:
-  - name: Add host centos-stream-template-clone
+  - name: "Add host {{ centos_hostname }}"
     awx.awx.host:
-      name: centos-stream-template-clone
+      name: "{{ centos_hostname }}"
       description: ""
       inventory: "Home Inventory"
       state: present
