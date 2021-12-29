@@ -26,3 +26,5 @@
     ansible.builtin.set_stats:
       data:
         centos_clone_ip:  "{{ clone_ip.stdout }}"
+        centos_hostname: "centos-stream-{{ dev_username }}"
+        dev_username: "{{ dev_username }}"
