@@ -84,6 +84,12 @@
       dest: /home/jboivie/projects/ansible-ee
     become: yes
     become_user: jboivie
+  - name: Clone ansible-config project
+    ansible.builtin.git:
+      repo: https://{{ the_secret | trim }}@github.com/forenkla/ansible-config.git
+      dest: /home/jboivie/projects/ansible-config
+    become: yes
+    become_user: jboivie
   - name: Paste into to Terminal for access via http://localhost:8080
     ansible.builtin.debug:
       msg: "ssh -N -L 8080:127.0.0.1:8080 jboivie@{{ centos_clone_ip }}"
