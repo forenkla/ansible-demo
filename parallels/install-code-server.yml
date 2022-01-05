@@ -90,9 +90,9 @@
     pip:
       name: ansible-builder
       state: present
-  - name: Install ansible-galaxy
+  - name: Install ansible (to get galaxy, vault etc)
     pip:
-      name: ansible-galaxy
+      name: ansible
       state: present
   - name: Install latest Git
     dnf:
