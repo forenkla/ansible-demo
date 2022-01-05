@@ -1,0 +1,5 @@
+---
+- name: New development enivornment
+  hosts: "{{ centos_hostname }}"
+  roles:
+    - development-server

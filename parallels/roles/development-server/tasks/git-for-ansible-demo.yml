@@ -1,3 +1,4 @@
+---
 # Install Git and clone repos related to Ansible Demo Environment
 
 - name: Install latest Git
