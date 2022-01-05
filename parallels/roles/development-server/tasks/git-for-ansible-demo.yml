@@ -1,0 +1,31 @@
+# Install Git and clone repos related to Ansible Demo Environment
+
+- name: Install latest Git
+  dnf:
+    name: git
+    state: latest
+- name: Apply Git config
+  template:
+    src: git-config.j2
+    dest: "/home/{{ dev_username }}/.gitconfig"
+    owner: "{{ dev_username }}"
+    group: "{{ dev_username }}"
+    mode: 0644
+- name: Clone ansible-demo project
+  ansible.builtin.git:
+    repo: https://{{ the_secret | trim }}@github.com/forenkla/ansible-demo.git
+    dest: "/home/{{ dev_username }}/projects/ansible-demo"
+  become: yes
+  become_user: "{{ dev_username }}"
+- name: Clone ansible-ee project
+  ansible.builtin.git:
+    repo: https://{{ the_secret | trim }}@github.com/forenkla/ansible-ee.git
+    dest: /home/{{ dev_username }}/projects/ansible-ee
+  become: yes
+  become_user: "{{ dev_username }}"
+- name: Clone ansible-config project
+  ansible.builtin.git:
+    repo: https://{{ the_secret | trim }}@github.com/forenkla/ansible-config.git
+    dest: "/home/{{ dev_username }}/projects/ansible-config"
+  become: yes
+  become_user: "{{ dev_username }}"

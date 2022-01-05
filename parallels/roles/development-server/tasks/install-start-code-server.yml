@@ -1,0 +1,21 @@
+# Tasks for installing and launching code-server
+
+- name: Download and Install code-server
+  ansible.builtin.shell:
+    cmd: curl -fsSL https://code-server.dev/install.sh | sh
+- name: Enable code-server
+  ansible.builtin.shell:
+    cmd: "systemctl enable --now code-server@{{ dev_username }}"
+- name: Set code-server password
+  template:
+      src: code-server-config.j2
+      dest: "/home/{{ dev_username }}/.config/code-server/config.yaml"
+      owner: "{{ dev_username }}"
+      group: "{{ dev_username }}"
+      mode: 0644
+- name: Enable code-server
+  ansible.builtin.shell:
+    cmd: "systemctl restart --now code-server@{{ dev_username }}"
+- name: Paste into to Terminal for access via http://localhost:8080
+  ansible.builtin.debug:
+    msg: "ssh -N -L 8080:127.0.0.1:8080 {{ dev_username }}@{{ centos_clone_ip }}"

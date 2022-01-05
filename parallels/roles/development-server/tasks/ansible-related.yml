@@ -1,0 +1,38 @@
+# Tasks for installing Python and Ansible related content
+# including execution environments from Private Automation Hub
+
+- name: Install Python
+  dnf:
+    name: python39
+    state: latest
+- name: Install Python venv
+  dnf:
+    name: virtualenv
+    state: latest
+- name: Install Podman
+  dnf:
+    name: podman
+    state: latest
+- name: Login to Private Automation Hub registry
+  ansible.builtin.shell:
+    cmd: "podman login --tls-verify=false -u admin -p {{ registry_pw }} 192.168.1.36"
+  become: yes
+  become_user: "{{ dev_username }}"
+- name: Pull execution environments (cause navigator doesn't support --tls-verify=false)
+  ansible.builtin.shell:
+    cmd: "podman pull --tls-verify=false {{ item }}"
+  become: yes
+  become_user: "{{ dev_username }}"
+  loop:
+    - "{{ private_automation_hub_ip }}/win_ee"
+    - "{{ private_automation_hub_ip }}/ee-supported-rhel8"
+    - "{{ private_automation_hub_ip }}/ee-29-rhel8"
+    - "{{ private_automation_hub_ip }}/ee-minimal-rhel8"
+- name: Install ansible-navigator
+  pip:
+    name: ansible-navigator
+    state: present
+- name: Install ansible-navigator
+  pip:
+    name: ansible-builder
+    state: present
