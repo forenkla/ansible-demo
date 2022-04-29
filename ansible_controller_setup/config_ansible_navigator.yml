@@ -1,5 +1,5 @@
 ---
-- name: Configure ansible-navigator
+- name: Setup ansible-demo project to controller
   hosts: localhost
   become: false
 
@@ -7,7 +7,7 @@
   - name: Add Win_EE execution environment to ansible_navigator
     blockinfile:
       path: ~/.ansible-navigator.yml
-      block: |
+      block: |2
           execution-environment:
             image: quay.io/jboivie/win_ee:latest
             enabled: true
@@ -16,5 +16,5 @@
             volume-mounts:
             - src: "/etc/ansible/"
               dest: "/etc/ansible/"
-            - src: /tmp/rhel/
-              dest: /tmp/rhel/
+            - src: "/tmp/rhel/"
+              dest: "/tmp/rhel/"
