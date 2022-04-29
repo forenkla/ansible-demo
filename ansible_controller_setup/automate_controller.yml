@@ -1,0 +1,91 @@
+---
+- name: Setup ansible-demo project to controller
+  hosts: localhost
+  become: false
+  gather_facts: false
+  vars:
+    win_username: test
+    win_password: test
+    inventory_name: Workshop Inventory
+
+  environment:
+    CONTROLLER_HOST: https://student1.1171.example.opentlc.com
+    CONTROLLER_USERNAME: admin
+    CONTROLLER_PASSWORD: 97x1abpBMfgl4x
+    CONTROLLER_VERIFY_SSL: false
+
+  tasks:
+  - name: Add Windows credentials
+    awx.awx.credential:
+      name: Windows credentials
+      credential_type: Machine
+      organization: Default
+      inputs:
+        username: "{{ win_username }}"
+        password: "{{ win_password }}"
+
+  - name: Add EE to controller
+    awx.awx.execution_environment:
+      name: "Win EE"
+      image: quay.io/jboivie/win_ee:latest
+
+  - name: AWX Project
+    awx.awx.project:
+      name: ansible-demo
+      organization: Default
+      default_environment: "Win EE"
+      state: present
+      scm_update_on_launch: True
+      scm_delete_on_update: True
+      scm_type: git
+      scm_url: https://github.com/forenkla/ansible-demo.git
+
+  - name: Add Job Template for install_iis.yml
+    awx.awx.job_template:
+      name: Install IIS
+      organization: Default
+      state: present
+      inventory: "{{ inventory_name }}"
+      playbook: install_iis.yml
+      project: ansible-demo
+      credential: Windows credentials
+
+  - name: Add Job Template for multiple_iis_sites.yml
+    awx.awx.job_template:
+      name: Setup multiple IIS sites
+      organization: Default
+      state: present
+      inventory: "{{ inventory_name }}"
+      playbook: multiple_iis_sites.yml
+      project: ansible-demo
+      credential: Windows credentials
+
+  - name: Add Job Template for install_chocolatey.yml
+    awx.awx.job_template:
+      name: Install Git with Chocolatey
+      organization: Default
+      state: present
+      inventory: "{{ inventory_name }}"
+      playbook: install_chocolatey.yml
+      project: ansible-demo
+      credential: Windows credentials
+
+  - name: Add Job Template for verify_http_with_powershell.yml
+    awx.awx.job_template:
+      name: Verify the WSMan HTTP listener
+      organization: Default
+      state: present
+      inventory: "{{ inventory_name }}"
+      playbook: verify_http_with_powershell.yml
+      project: ansible-demo
+      credential: Windows credentials
+
+  - name: Add Job Template for legal_message_regedit.yml
+    awx.awx.job_template:
+      name: Change legal message with Regedit
+      organization: Default
+      state: present
+      inventory: "{{ inventory_name }}"
+      playbook: legal_message_regedit.yml
+      project: ansible-demo
+      credential: Windows credentials
