@@ -1,0 +1,20 @@
+---
+- name: Configure ansible-navigator
+  hosts: localhost
+  become: false
+
+  tasks:
+  - name: Add Win_EE execution environment to ansible_navigator
+    blockinfile:
+      path: ~/.ansible-navigator.yml
+      block: |
+          execution-environment:
+            image: quay.io/jboivie/win_ee:latest
+            enabled: true
+            container-engine: podman
+            pull-policy: missing
+            volume-mounts:
+            - src: "/etc/ansible/"
+              dest: "/etc/ansible/"
+            - src: /tmp/rhel/
+              dest: /tmp/rhel/
