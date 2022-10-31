@@ -5,4 +5,3 @@ collections:
   - name: community.general
   - name: community.windows
   - name: chocolatey.chocolatey
-  - name: mindpointgroup.windows_2019_cis
