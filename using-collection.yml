@@ -8,6 +8,8 @@
   pre_tasks:
     - debug:
         msg: 'Beginning web server configuration.'
+    - import_role:
+        name: apache_vhost
 
   roles:
     - apache_vhost
