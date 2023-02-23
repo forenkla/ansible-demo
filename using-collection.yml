@@ -10,7 +10,7 @@
         name: jboivie.apache_vhost_collection.apache_vhost
 
   roles:
-    - apache_vhost
+    - jboivie.apache_vhost_collection.apache_vhost
 
   post_tasks:
     - debug:
