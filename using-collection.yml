@@ -1,6 +1,8 @@
 ---
 - name: use apache_vhost role playbook
   hosts: node2
+  collections:
+    - jboivie.apache_vhost_collection
   become: true
 
   pre_tasks:
