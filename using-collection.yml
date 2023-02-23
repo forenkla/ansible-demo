@@ -1,15 +1,13 @@
 ---
 - name: use apache_vhost role playbook
   hosts: node2
-  collections:
-    - jboivie.apache_vhost_collection
   become: true
 
   pre_tasks:
     - debug:
         msg: 'Beginning web server configuration.'
     - import_role:
-        name: apache_vhost
+        name: jboivie.apache_vhost_collection.apache_vhost
 
   roles:
     - apache_vhost
