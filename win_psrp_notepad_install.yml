@@ -11,6 +11,6 @@
         dest: C:\Temp\vlc-3.0.18-win32.msi
         
     - name: Install VLC MSI package
-      ansible.windows.psrp.win_package:
+      win_package:
         path: C:\Temp\vlc-3.0.18-win32.msi
         arguments: '/quiet'
