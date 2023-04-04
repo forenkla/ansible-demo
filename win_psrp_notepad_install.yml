@@ -1,0 +1,16 @@
+---
+- name: Install Notepad++ MSI package with PSRP
+  hosts: windows
+  gather_facts: no
+  collections:
+    - ansible.windows
+  tasks:
+    - name: Copy VLC MSI package to target machine
+      win_copy:
+        src: /home/student/windows-workshop/workshop_project/vlc-3.0.18-win32.msi
+        dest: C:\Temp\vlc-3.0.18-win32.msi
+        
+    - name: Install VLC MSI package
+      ansible.windows.psrp.win_package:
+        path: C:\Temp\vlc-3.0.18-win32.msi
+        arguments: '/quiet'
