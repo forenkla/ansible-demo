@@ -7,7 +7,7 @@
   tasks:
     - name: Copy VLC MSI package to target machine
       win_copy:
-        src: /home/student/windows-workshop/workshop_project/vlc-3.0.18-win32.msi
+        remote_src: /home/student/windows-workshop/workshop_project/vlc-3.0.18-win32.msi
         dest: C:\Temp\vlc-3.0.18-win32.msi
         
     - name: Install VLC MSI package
