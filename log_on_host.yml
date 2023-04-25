@@ -4,5 +4,5 @@
   become: yes
   tasks:
   - name: Simple Usage
-    community.general.syslogger:
-      msg: "I will end up as daemon.info"
+    debug:
+      msg: "Job ID: {{ tower_job_id }}"
