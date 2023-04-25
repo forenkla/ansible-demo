@@ -1,0 +1,8 @@
+---
+- name: Testing logging
+  hosts: node1
+  become: yes
+  tasks:
+    - name: Simple Usage
+      community.general.syslogger:
+        msg: "I will end up as daemon.info"
