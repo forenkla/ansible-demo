@@ -1,0 +1,15 @@
+---
+- name: Install mypackage if it's not already installed
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Check if package is installed
+      my_yum_plugin:
+        name: mypackage
+      register: package_installed
+
+    - name: Install package
+      yum:
+        name: mypackage
+      when: package_installed.changed
