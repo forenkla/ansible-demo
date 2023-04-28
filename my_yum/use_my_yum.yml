@@ -6,10 +6,10 @@
   tasks:
     - name: Check if package is installed
       my_yum_plugin:
-        name: mypackage
+        name: httpd
       register: package_installed
 
     - name: Install package
       yum:
-        name: mypackage
+        name: httpd
       when: package_installed.changed
