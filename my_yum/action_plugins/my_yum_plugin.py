@@ -11,14 +11,14 @@ class ActionModule(ActionBase):
         # Check if the package is installed
         command = "rpm -q {0}".format(pkg_name)
         rc, out, err = self._connection.exec_command(command)
-        stdout = to_bytes(out.read())
+        #stdout = to_bytes(out.read())
         if rc == 0:
             return {'changed': False}
 
         # Install the package
         command = "yum install -y {0}".format(pkg_name)
         rc, out, err = self._connection.exec_command(command)
-        stdout = to_bytes(out.read())
+        #stdout = to_bytes(out.read())
         if rc != 0:
             self._display.display("Failed to install {0} package".format(pkg_name))
             return {'failed': True}
