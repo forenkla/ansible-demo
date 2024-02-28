@@ -1,18 +1,8 @@
 ---
-- hosts: yum
+- name: Update Azure RHEL VMs with desired packages
+  hosts: all
   tasks:
-  - name: Update all installed packages using YUM module
-    yum:
-      name: '*'
-      state: latest
-      update_cache: yes
-      update_only: yes
-    register: yum_update_status
-
-  - name: Remove packates not needed anymore
-    yum:
-      autoremove: yes
-
-  - name: Reboot when packages were updated
-    reboot:
-    when: yum_update_status.changed
+    - name: Update installed packages
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
